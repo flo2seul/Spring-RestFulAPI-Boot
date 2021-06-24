@@ -18,33 +18,31 @@ public class ProductController {
 	private ProductCatalog productCatalog;
 	
 	@RequestMapping("myProduct.do")
-	public ModelAndView addProduct(String name, String maker, int price) throws Exception {
-		int success = productCatalog.addProduct(new Product(name, maker, price));
-		return new ModelAndView("WEB-INF/views/addProductSuccess.jsp", "success", success);
+	public ModelAndView insert(Product pvo) throws Exception{
+		System.out.println("폼으로부터 받은 데이터"+pvo.getId());
+		
+		productCatalog.addProduct(pvo);
+		
+		System.out.println("폼으로부터 받은 데이터"+pvo.getId());
+		
+		return new ModelAndView("insert_result","info",pvo);
 	}
 	
-	
-	@RequestMapping("productSearchByName.do")
-	public ModelAndView searchProductByName(String productName) throws Exception {
-		 Product product = new Product();
-		 
-		 if(productName != null) product.setName(productName);
-		 
-		 List<Product> list = productCatalog.getAllProduct(product);
+	@RequestMapping("myProductSerch.do")
+	public ModelAndView getProducts(String word, String command) throws Exception{
+		String viewName = "";
+		List<Product> list = null;
 		
-		return new ModelAndView("WEB-INF/views/productList.jsp", "list", list);
+		if(command.equals("findByProductName")) {
+			list = productCatalog.findByProductName(word);
+			viewName = "find_result";
+			
+		}else if(command.equals("findByProductMaker")) {
+			list = productCatalog.findByProductMaker(word);
+			viewName = "find_result";
+			
+		}
+		return new ModelAndView(viewName, "list",list);
 	}
-	
-	@RequestMapping("productSearchByMaker.do")
-	public ModelAndView searchProductByMaker(String productMaker) throws Exception {
-		
-		Product product = new Product();
-		if(productMaker != null) product.setMaker(productMaker);
-		
-		List<Product> list = productCatalog.getAllProduct(product);
-	
-		return new ModelAndView("WEB-INF/views/productList.jsp", "list", list);
-	}
-	
 	
 }

@@ -15,15 +15,18 @@
 <input type="submit" value="상품등록">
 </form>
 ++++++++++++++++++++++++++++
-
-<form action="productSearchByName.do" method="post">
-상품검색 : <input type="text" name="productName" placeholder="상품명을 입력하지 않으면 전체 검색됩니다">
-<input type="submit" value="상품찾기">
-</form>
-<form action="productSearchByMaker.do" method="post">
-제조사검색 : <input type="text" name="productMaker" placeholder="제품명을 입력하지 않으면 전체 검색됩니다">
-
-<input type="submit" value="상품찾기">
+<br><br>
+<h3>상품명, 제조사별 검색방법을 먼저 선택하세요.</h3>
+<form action="myProductSerch.do">
+<select name="command">
+	<option value=""====아래에서 선택하세요====></option>
+	<option value="findByProductName">상품명으로 검색하기</option>
+	<option value="findByProductMaker">제조사로 검색하기</option>
+	<option value="findByProductId">상품 아이디로 검색하기</option>
+	
+</select>
+<input type="text" name="word"><br><br>
+<input type="submit" value="상품찾기"><br><br>
 </form>
 </body>
 </html>

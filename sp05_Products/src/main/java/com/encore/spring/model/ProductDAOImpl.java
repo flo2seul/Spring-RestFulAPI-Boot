@@ -15,24 +15,29 @@ public class ProductDAOImpl implements ProductDAO {
 	private SqlSession sqlSession;
 	
 	private static final String NS = "ProductMapper.";
+
+	@Override
+	public void addProduct(Product vo) throws Exception {
+		
+		sqlSession.insert(NS+"addProduct",vo);
+	}
+
+	@Override
+	public List<Product> findByProductName(String words) throws Exception {
+		
+		return sqlSession.selectList(NS+"findByProductName",words);
+	}
+
+	@Override
+	public List<Product> findProducts() throws Exception {
+		
+		return sqlSession.selectList(NS+"findProducts");
+	}
+
+	@Override
+	public List<Product> findByProductMaker(String words) throws Exception {
+		
+		return sqlSession.selectList(NS+"findByProductMaker",words);
+	}
 	
-	//필요없음
-	@Override
-	public List<Product> getAllProduct() throws Exception {
-		
-		return sqlSession.selectList(NS + "getAllProductList");
-	}
-
-	@Override
-	public int addProduct(Product product) throws Exception {
-		
-		return sqlSession.insert(NS + "addProduct", product); 
-	}
-
-	@Override
-	public List<Product> getAllProduct(Product product) throws Exception {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList(NS + "getAllProductList", product);
-	}
-
 }

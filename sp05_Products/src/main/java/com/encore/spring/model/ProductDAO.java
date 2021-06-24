@@ -5,7 +5,9 @@ import java.util.List;
 import com.encore.spring.domain.Product;
 
 public interface ProductDAO {
-	List<Product> getAllProduct() throws Exception;
-	List<Product> getAllProduct(Product product) throws Exception;
-	int addProduct(Product product) throws Exception;
+	void addProduct(Product vo) throws Exception;
+	List<Product> findByProductName(String words) throws Exception;
+	List<Product> findProducts() throws Exception;
+	List<Product> findByProductMaker(String words) throws Exception;
+	
 }

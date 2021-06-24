@@ -12,23 +12,28 @@ public class ProductCatalogImpl implements ProductCatalog {
 
 	@Autowired
 	private ProductDAO productDAO;
+
+	@Override
+	public void addProduct(Product vo) throws Exception {
+		productDAO.addProduct(vo);
+		
+	}
+
+	@Override
+	public List<Product> findByProductName(String words) throws Exception {
+		return productDAO.findByProductName(words);
+	}
+
+	@Override
+	public List<Product> findProducts() throws Exception {
+		return productDAO.findProducts();
+	}
+
+	@Override
+	public List<Product> findByProductMaker(String words) throws Exception {
+		return productDAO.findByProductMaker(words);
+	}
 	
-	@Override
-	public List<Product> getAllProduct() throws Exception {
-		
-		return productDAO.getAllProduct();
-	}
-
-	@Override
-	public List<Product> getAllProduct(Product product) throws Exception {
-		
-		return productDAO.getAllProduct(product);
-	}
-
-	@Override
-	public int addProduct(Product product) throws Exception {
-		return productDAO.addProduct(product);
-
-	}
+	
 
 }
