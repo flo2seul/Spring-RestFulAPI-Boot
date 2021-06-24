@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<!-- 1. 디비정보 가지고 있는 dbconn.properties 파일 와이어링 -->
+	<properties resource="config/dbconn.properties"/>
+	
+	<!-- Oracle 벤더인 경우 null값을 허용하지 않는 것으로 기본세팅이 잡혀져 있다.
+		옵션을 추가해줘야 실행가능하다.
+		settings 태그의 위치도 주의...properties 태그 다음에 반드시 작성
+		
+		MySql 벤더는 옵션 부여하지 않아도 잘 작동된다.
+	  -->
+	  
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+	
+	<!-- 2. 디비 하나의 row를 인스턴스화 시킨 클래스 vo -->
+	<typeAliases> 
+		<typeAlias type="com.encore.spring.domain.Item" alias="item"/>
+	</typeAliases>
+	
+
+		<mappers>
+			<mapper resource="sql/item-shopping-mapper.xml"/>
+			
+		</mappers>
+</configuration>
