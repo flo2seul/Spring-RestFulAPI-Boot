@@ -42,7 +42,7 @@
  		WHERE maker LIKE #{vaule}
  	</select>
  	
- 	<select id="findProducts" resultType="myProduct">
+ 	<select id="findProducts" resultType="product">
  		<include refid="select-product"></include>
  	</select>
  	
