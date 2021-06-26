@@ -1,4 +1,4 @@
-package com.encore.spring.model;
+package com.encore.spring.model.Impl;
 
 import java.util.List;
 
@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.encore.spring.domain.Product;
+import com.encore.spring.model.ProductCatalog;
+import com.encore.spring.model.ProductDAO;
 
 @Service
 public class ProductCatalogImpl implements ProductCatalog {

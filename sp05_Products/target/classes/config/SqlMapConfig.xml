@@ -3,7 +3,11 @@
 	"http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
-	<properties resource="config/dbconn.properties" />
+	<properties resource="config/jdbc.properties" />
+	
+	<settings>		
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings>
 	
 	<typeAliases>
 		<package name="com.encore.spring.domain" /><!-- item, productCart -->
@@ -23,7 +27,7 @@
 	</environments>
 	
 	<mappers>
-		<mapper resource="sql/product-mapper.xml" />
+		<mapper resource="mapper/product-mapper.xml" />
 	</mappers>
 	
 	
