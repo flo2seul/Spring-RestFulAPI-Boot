@@ -34,12 +34,12 @@
  	
  	<select id="findByProductName" parameterType="string" resultType="product">
  		<include refid="select-product"/>
- 		WHERE name LIKE '%${vaule}%'
+ 		WHERE name LIKE '%${value}%'
  	</select>
  	
  	<select id="findByProductMaker" parameterType="string" resultType="product">
  		<include refid="select-product"/>
- 		WHERE maker LIKE #{vaule}
+ 		WHERE maker LIKE #{value}
  	</select>
  	
  	<select id="findProducts" resultType="product">
