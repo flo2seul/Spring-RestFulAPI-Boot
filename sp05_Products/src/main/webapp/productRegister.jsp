@@ -14,7 +14,7 @@
 가   격 : <input type="text" name="price"><br><br>
 <input type="submit" value="상품등록">
 </form>
-++++++++++++++++++++++++++++
++++++++++++++++++++++++++++
 <br><br>
 <h3>상품명, 제조사별 검색방법을 먼저 선택하세요.</h3>
 <form action="myProductSerch.do">
