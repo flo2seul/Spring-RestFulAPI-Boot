@@ -4,17 +4,20 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.encore.spring.domain.Product;
 import com.encore.spring.model.ProductCatalog;
 import com.encore.spring.model.ProductDAO;
 
 @Service
+@Transactional
 public class ProductCatalogImpl implements ProductCatalog {
 
 	@Autowired
 	private ProductDAO productDAO;
-
+	
+	@Transactional
 	@Override
 	public void addProduct(Product vo) throws Exception {
 		productDAO.addProduct(vo);
