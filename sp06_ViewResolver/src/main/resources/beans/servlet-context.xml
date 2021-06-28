@@ -11,12 +11,28 @@ ModelAndView는 View 페이지 이름과 + Model(Data)에 대한 정보가 담�
 View Page의 실질적인 물리적 위치정보를 담기 위해서 필요한 API 라이브러리 클래스가 바로 viewResolver 이다.
 viewResolver는 여러개의 인스턴스가 존재하는데 그 중에서 기본으로 사용되는 객체는 우리가 계속 사용해왔던 InternalResourceViewResolver이다.
 하지만 BeanNameViewResolver 객체도 반드시 알아야 하는데, 
-1) 결과페이지 경로의 다각화
+1) 결과페이지 경로의 다각화 :: JstlView
 2) FileDownload의 Ajax 기술을 사용하려면 필수적으로 알아야하는 기술이다. 
  -->
 <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 	<property name="prefix" value="/response/"/>
 	<property name="suffix" value=".jsp"/>
+	<property name="order" value="1"/>
 </bean>
+
+<!-- 
+ViewResolver 중에서 BeanNameViewResolver를 빈으로 등록한다.
+ -->
+<bean id="beanNameResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
+	<property name="order" value="0"/>
+</bean>
+<bean name="board_result" class="org.springframework.web.servlet.view.JstlView">
+	<property name="url" value="board/result/find_ok.jsp"></property>
+</bean>
+<bean name="product_result" class="org.springframework.web.servlet.view.JstlView">
+	<property name="url" value="product/result/find_ok.jsp"></property>
+</bean>
+
+
 <context:component-scan base-package="com.encore.spring.controller"></context:component-scan>
 </beans>
