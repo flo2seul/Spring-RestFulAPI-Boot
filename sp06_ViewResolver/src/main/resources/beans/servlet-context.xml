@@ -22,6 +22,8 @@ viewResolver는 여러개의 인스턴스가 존재하는데 그 중에서 기�
 
 <!-- 
 ViewResolver 중에서 BeanNameViewResolver를 빈으로 등록한다.
+우선순위를 0으로 했기 때문에 컨트롤러 ModelAndView 결과 페이지 요청하는 이름을 여기서 일단찾는다.bean name="" 이 부분
+
  -->
 <bean id="beanNameResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
 	<property name="order" value="0"/>

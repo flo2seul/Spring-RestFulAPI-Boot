@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	
+<mapper namespace="BookMapper">
+	
+	<resultMap type="book" id="bookSelectRM">
+		<result property="isbn" column="isbn"/>
+		<result property="title" column="title"/>
+		<result property="catalogue" column="catalogue"/>
+		<result property="nation" column="nation"/>
+		<result property="publish_date" column="publish_date"/>
+		<result property="author" column="author"/>
+		<result property="price" column="price"/>
+		<result property="currency" column="currency"/>
+		<result property="description" column="description"/>
+	</resultMap>
+	
+	<!-- SQL구문의 재사용 -->
+	<sql id="select-book">
+		SELECT
+		isbn, title, catalogue, nation, publish_date, author, price, currency, description
+		FROM book
+	</sql>
+	<sql id="orderby-price-desc">
+		ORDER BY price DESC
+	</sql>
+	
+	<!-- INSERT -->
+		<insert id="addBook" parameterType="book">
+		INSERT INTO 
+		book (isbn, title, catalogue, nation, publish_date, author, price, currency, description)
+		VALUES(#{isbn},#{title},#{catalogue},#{nation},#{publish_date},#{author},#{price},#{currency},#{description})
+		
+	</insert>
+	
+	<!-- UPDATE -->
+	<update id="updateBook" parameterType="book">
+		UPDATE book
+		set price = #{price}
+		WHERE isbn = #{isbn}
+	
+	</update>
+	
+	<!-- DELETE -->
+	<delete id="removeBook" parameterType="string">
+		DELETE
+		FROM book
+		WHERE isbn=#{VALUE}
+	</delete>
+	
+	<!-- 정적 쿼리 -->
+	<select id="getBook" resultMap="bookSelectRM" parameterType="string"> <!-- SELECT문, 컬럼명과 필드명이 다름에도 불구하고 ALIAS 사용 안했음  -->
+		<include refid="select-book"></include>
+		WHERE isbn=#{isbn}
+	</select>
+	
+	<!-- 동적 쿼리 -->
+	<select id="getBookList" parameterType="book" resultMap="bookSelectRM">
+		<include refid="select-book"/>
+		<where>
+			<if test="title !=null">
+				title LIKE #{title}
+			</if>
+			<if test=" price != null">
+				OR price LIKE #{price}
+			</if>
+		</where>
+		
+		<include refid="orderby-price-desc"/>
+	</select>
+	
+</mapper>
+	
+	

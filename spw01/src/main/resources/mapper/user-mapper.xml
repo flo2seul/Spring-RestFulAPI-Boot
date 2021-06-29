@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	
+<mapper namespace="UserMapper">
+	
+	<resultMap type="userVO" id="user">
+		<result property="userId" column="userId"/>
+		<result property="password" column="password"/>
+		<result property="name" column="name"/>
+	<result property="address" column="address"/>
+	
+	</resultMap>
+	
+
+	
+	<!-- 동적 쿼리 -->
+	<select id="getuserList" parameterType="string" resultMap="user">
+		
+				SELECT * FROM userinfo WHERE userId LIKE '%${value}%'
+	
+	</select>
+	
+</mapper>
+	
+	
