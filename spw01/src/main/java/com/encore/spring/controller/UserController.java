@@ -16,14 +16,14 @@ public class UserController {
 	@RequestMapping("front.do")
 	public ModelAndView front(HttpServletRequest request, String userId,String password) throws Exception {
 		String path="error.jsp";
-		UserVO user= UserVO.getUserVO(userId);
+		//UserVO user= UserVO(userId);
 		HttpSession session = request.getSession();
-		if(user!=null) {
-			if(user.getPassword().equals(password)) {
-				session.setAttribute("vo", user);
+		//if(user!=null) {
+			//if(user.getPassword().equals(password)) {
+				//session.setAttribute("vo", user);
 				path="loginSucess.jsp";
-			}
-		}
+			//}
+		//}
 		return new ModelAndView(path);
 	}
 
