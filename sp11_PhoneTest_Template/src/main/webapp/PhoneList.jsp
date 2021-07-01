@@ -16,9 +16,18 @@
 			<th>가격</th>
 			<th>제조사명</th>
 			<th>삭제</th>
-		</tr>		
+		</tr>	
+		<c:forEach items="${phones}" var="phone">
+			<tr>
+				<td>${phone.num}</td>
+				<td>${phone.model}</td>
+				<td>${phone.price}</td>
+				<td>${phone.company.vendor}</td>
+				<td><input type="checkbox"></td>
+			</tr>
+		</c:forEach>	
 	</table>
 	<a href="regPhone.do">추가 등록</a>&nbsp;
-	<a href="#" id="selectedDel">선택항목삭제</a>
+	<a href="delPhone.do" id="selectedDel">선택항목삭제</a>
 </body>
 </html>

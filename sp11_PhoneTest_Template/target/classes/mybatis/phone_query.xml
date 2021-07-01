@@ -4,16 +4,13 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="sql.pms.mapper">
-
-	<insert id="insert">
-		INSERT
-		INTO phones
-		(num, model, price, vcode)
-		VALUES ( #{num}, #{model}, #{price}, #{vcode})
-		
+	<insert id="insert" parameterType="phone">
+		INSERT INTO
+		phones (num, model, price, vcode)
+		VALUES (#{num},#{model},#{price},#{vcode})
 	</insert>
 	
-	<resultMap type = "phone" id = "phoneWithCompany">
+	<resultMap type="phone" id="phoneWithCompany">
 		<id column="num" property="num"/>
 		<result column="model" property="model"/>
 		<result column="price" property="price"/>
@@ -23,10 +20,11 @@
 			<result column="vendor" property="vendor"/>
 		</association>
 	</resultMap>
-	<!-- 동적 쿼리 작성 :: 모든 폰 조회 및 상세폰 조회 둘 다 가능하도록 selectAll + selectOne -->
-	<select id="select" parameterType="phone" resultType="phoneWithCompany">
-		SELECT
-		p.num, p.model, p.price, p.vcode, c.vcode, c.vendor
+	
+	<!-- 동적 쿼리 작성 :: 모든 폰 조회및 상세폰 조회 둘다 가능하도록 :: selectAll + selectOne-->
+	<select id="select" parameterType="phone" resultMap="phoneWithCompany"><!-- join 사용 -->
+		SELECT 
+		p.num, p.model,p.price, p.vcode, c.vcode, c.vendor
 		FROM phones p
 		JOIN company c USING(vcode)
 		<if test="num!=null">
@@ -34,8 +32,8 @@
 		</if>
 	</select>
 	
-	<!-- 동적 쿼리 작성 :: 로그인 기능과 id로 회원 검색기능 둘다 구현 -->
-	<select id="selectUser" parameterType="userInfo" resultType="userInfo"><!-- login -->
+	<!--  동적 쿼리 작성 :: 로그인 기능과 id로 회원 검색기능 둘다 가능하도록 -->
+	<select id="selectUser" parameterType="userInfo" resultType="userInfo"><!-- Login + SelectOne -->
 		SELECT
 		id, pw
 		FROM userinfo
@@ -45,20 +43,24 @@
 		</if>
 	</select>
 	
-	<delete id="delete">
+	<delete id="delete" parameterType="string">	
 		DELETE
 		FROM phones
-		WHERE no = #{VALUE}
+		WHERE num = #{VALUE}
 	</delete>
 	
 	<update id="update" parameterType="phone">
-		
 		UPDATE
 		phones
-		SET model =#{model}, price=#{price}, vcode=#{vcode}
+		SET model=#{model}, price=#{price}, vcode=#{vcode}
 		WHERE num=#{num}
 	</update>
 </mapper>
+
+
+
+
+
 
 
 

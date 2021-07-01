@@ -4,13 +4,12 @@
 <configuration>
 
 	<typeAliases>
-		<package name = "com.encore.pms.dto"/>
+		<package name="com.encore.pms.dto"/>
 	</typeAliases>
 	
 	<mappers>
-		<mapper resource="phone_query.xml"/>
+		<mapper resource="mybatis/phone_query.xml"/>
 	</mappers>
-
 	
 </configuration>
 
