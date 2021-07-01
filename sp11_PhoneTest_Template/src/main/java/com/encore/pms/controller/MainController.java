@@ -78,18 +78,26 @@ public class MainController {
 			return "Error";
 		}
 	}
-	@PostMapping("delPhone.do")
-	public String doDelPhone(String num, Model model) {
+	@GetMapping("detail.do")
+	public String doDetail(Phone phone, Model model) {
 		try {
-			iPhoneService.delete(num);
-			model.addAttribute("title", "핸드폰 관리 - 핸드폰 등록 성공");
-			return "Result";
-		}catch(Exception e) {
-			model.addAttribute("title", "핸드폰 관리 - 핸드폰 등록 에러");
+			Phone selected = iPhoneService.select(phone);
+			model.addAttribute("title","핸드폰 관리 - 핸드폰 상세조회 성공");
+			model.addAttribute("phone",selected);
+			return "PhoneView";
+		}catch(Exception e){
+			model.addAttribute("title","핸드폰 관리 - 핸드폰 상세조회 에러");
+			model.addAttribute("message","문제내용 - 상세 조회중 오류");
 			return "Error";
+				
 		}
 	}
-}
+	
+	
+	
+
+	}
+
 
 
 

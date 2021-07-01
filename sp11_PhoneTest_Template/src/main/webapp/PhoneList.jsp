@@ -7,8 +7,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/resources/jquery/jquery-3.3.1.min.js"></script>
+
 </head>
 <body>	
+	<jsp:include page="/header.jsp"></jsp:include>
 	<table>
 		<tr>
 			<th>모델번호</th>
@@ -19,15 +22,17 @@
 		</tr>	
 		<c:forEach items="${phones}" var="phone">
 			<tr>
-				<td>${phone.num}</td>
+				<td><a href="detail.do?num=${phone.num}"></a></td>
 				<td>${phone.model}</td>
 				<td>${phone.price}</td>
 				<td>${phone.company.vendor}</td>
 				<td><input type="checkbox"></td>
+					
 			</tr>
 		</c:forEach>	
 	</table>
 	<a href="regPhone.do">추가 등록</a>&nbsp;
 	<a href="delPhone.do" id="selectedDel">선택항목삭제</a>
+	 	
 </body>
 </html>

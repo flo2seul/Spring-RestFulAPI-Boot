@@ -19,8 +19,16 @@ a {
 <h1> 메인 페이지 </h1>
 <p/>
 <p/>
-	<h4> <a href="regPhone.do">핸드폰 등록</a>  </h4>
-	<h4> <a href="searchPhone.do">핸드폰 목록</a></h4>
-	<h4> <a href="login.do">로그인</a></h4>	
+<c:choose>
+	<c:when test="${empty loginUser}">
+		<h4> <a href="searchPhone.do">핸드폰 목록</a></h4>
+		<h4> <a href="login.do">로그인</a></h4>	
+	</c:when>
+	
+	<c:otherwise>
+	<h4> <a href="regPhone.do">핸드폰 등록</a> </h4>
+	<h4> <a href="searchPhone.do">핸드폰 목록</a></h4>		
+	</c:otherwise>
+</c:choose>
 </body>
 </html>
