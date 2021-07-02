@@ -7,5 +7,9 @@ import com.encore.board.domain.BoardVO;
 public interface BoardDAO {
 	int write(BoardVO vo);
 	String selectByNoForDate(int no);
-	public List<BoardVO> boardList(BoardVO boardVO);
+	List<BoardVO> boardList(BoardVO boardVO);
+	BoardVO showContent(int no);
+	void updateBoard(BoardVO vo);
+	void deleteBoard(int no);
+	void updateCount(int no);
 }

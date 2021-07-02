@@ -31,4 +31,38 @@ public class BoardServiceImpl implements BoardService{
     }
 
 
+
+	@Override
+	public BoardVO showContent(int no) {
+		
+		return boardDAO.showContent(no);
+	}
+
+
+
+	@Override
+	public void updateBoard(BoardVO vo) {
+		
+		boardDAO.updateBoard(vo);
+	}
+
+
+
+	@Override
+	public void deleteBoard(int no) {
+		
+		boardDAO.deleteBoard(no);
+		
+	}
+
+
+
+	@Override
+	public void updateCount(int no) {
+		
+		boardDAO.updateCount(no);
+		
+	}
+
+
 }

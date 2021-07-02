@@ -8,4 +8,8 @@ public interface BoardService {
 	int write(BoardVO vo);
 	//String selectByNoForDate(int no);
 	List<BoardVO> boardList(BoardVO boardVO);
+	BoardVO showContent(int no);
+	void updateBoard(BoardVO vo);
+	void deleteBoard(int no);
+	void updateCount(int no);
 }

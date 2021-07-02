@@ -34,7 +34,7 @@
 					<tr>
 						<td>작성자 :  ${bvo.memberVO.name} |
 							작성일시 : ${bvo.writeDate}
-							Count : ${rbvo.count}
+							Count : ${bvo.count}
 						</td>
 					</tr>
 					<tr>
@@ -57,7 +57,7 @@
 						-->
 						<c:if test="${bvo.memberVO.id==sessionScope.mvo.id }">
 							<img alt="삭제" src="${pageContext.request.contextPath}/img/delete_btn.jpg" border="0" onclick="deleteBoard()">
-							<img alt="삭제" src="${pageContext.request.contextPath}/img/modify_btn.jpg" border="0" onclick="updateBoard()">
+							<img alt="수정" src="${pageContext.request.contextPath}/img/modify_btn.jpg" border="0" onclick="updateBoard()">
 						</c:if>
 						</td>
 					</tr>

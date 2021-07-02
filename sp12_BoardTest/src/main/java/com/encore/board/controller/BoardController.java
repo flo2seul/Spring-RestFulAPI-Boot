@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.encore.board.domain.BoardVO;
@@ -39,4 +40,42 @@ public class BoardController {
         
         return "board/list";
     }
+	@RequestMapping("showContent.do")
+	public String showContent(int no, Model model) throws Exception{
+		
+		boardService.updateCount(no);
+		BoardVO vo = boardService.showContent(no);
+        model.addAttribute("bvo", vo);
+   
+		
+		return"board/show_content";
+				
+	}
+	@RequestMapping("updateView.do")
+	public String updateView(int no, Model model) throws Exception{
+		BoardVO vo = boardService.showContent(no);
+		model.addAttribute("bvo",vo);
+		return "board/update";
+	
+				
+	}
+	
+	@RequestMapping("updateBoard.do")
+	public String updateBoard(BoardVO vo) throws Exception{
+		 
+		boardService.updateBoard(vo);
+		return "redirect:list.do";
+	
+				
+	}
+	@RequestMapping("delete.do")
+	public String deleteBoard(int no) throws Exception{
+	
+		boardService.deleteBoard(no);
+		return "redirect:list.do";
+	
+				
+	}
+	
+
 }

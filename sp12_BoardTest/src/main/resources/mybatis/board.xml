@@ -39,13 +39,33 @@
 	<resultMap type="boardVO" id="boardRM" extends="boardListRM">
 		<result column="content" property="content"/>
 	</resultMap>
-	<select id="showContent" resultType="boardVO">
+	<select id="showContent" resultMap="boardRM">
 		SELECT
 		b.no, b.title, b.count, b.w_date, b.content, m.id, m.name
 		FROM springboard b, member m
 		WHERE b.id = m.id AND b.no =#{VALUE}
 		ORDER BY no DESC
 	</select>
+
+	<update id="updateBoard" parameterType="boardVO">
+		UPDATE
+		springboard
+		SET title=#{title}, content=#{content}
+		WHERE no=#{no}
+	</update>
+	
+	<delete id="deleteBoard" parameterType="int">	
+		DELETE
+		FROM springboard
+		WHERE no=#{no}
+	</delete>
+	
+	<update id="updateCount" parameterType="int"> 
+		UPDATE
+	    springboard
+		SET count=count+1
+		WHERE no=#{no} 
+	</update>
 
 </mapper>
 	
