@@ -26,13 +26,43 @@
 				<td>${phone.model}</td>
 				<td>${phone.price}</td>
 				<td>${phone.company.vendor}</td>
-				<td><input type="checkbox"></td>
+				<td><input type="checkbox" data-num="${phone.num}"></td>
 					
 			</tr>
 		</c:forEach>	
 	</table>
 	<a href="regPhone.do">추가 등록</a>&nbsp;
-	<a href="delPhone.do" id="selectedDel">선택항목삭제</a>
+	<a href="#" id="selectedDel">선택항목삭제</a>
 	 	
 </body>
+<script>
+/* javascript
+	$('#selectedDel').on('click',function(){
+		let url = "delete.do?"
+		$(":checkbox:checked").each(function(index, item) {
+			url += "num="+$(item).attr('data-num')+"&"
+		});//each
+		location.href=url;
+		});//on
+		*/
+//비동기 작성2
+$('#selectedDel').click(function() {
+	var param="";
+	$(":checkbox:checked").each(function(index, item) {
+		param = param + "&num="+$(item).attr("data-num");
+	});//each
+	
+	$.ajax({
+		type:'get',
+		url:'deleteAjax.do',
+		data:param,
+		
+		sucess:function(data){
+			location.reload();
+		}
+		
+	})
+})
+		
+</script>
 </html>

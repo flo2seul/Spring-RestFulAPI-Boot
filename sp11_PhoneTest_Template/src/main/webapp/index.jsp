@@ -16,6 +16,7 @@ a {
 </style>
 </head>
 <body>
+<jsp:include page="/header.jsp"></jsp:include>
 <h1> 메인 페이지 </h1>
 <p/>
 <p/>
@@ -27,7 +28,7 @@ a {
 	
 	<c:otherwise>
 	<h4> <a href="regPhone.do">핸드폰 등록</a> </h4>
-	<h4> <a href="searchPhone.do">핸드폰 목록</a></h4>		
+	<h4> <a href="searchPhone.do">핸드폰 목록</a></h4>
 	</c:otherwise>
 </c:choose>
 </body>

@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.encore.pms.dto.Phone;
@@ -47,6 +48,12 @@ public class MainController {
 		}	
 	}
 	
+	@RequestMapping("logout.do")
+	public ModelAndView logout(HttpSession session) throws Exception{
+		String path = "index.jsp";
+		session.invalidate();	
+		return new ModelAndView("redirect:"+path);
+	}
 	@GetMapping("searchPhone.do") //전체 폰 목록을 보여주는 기능..결과 페이지는 PhoneList.jsp
 	public String doList(Model model) {
 		try {
@@ -92,8 +99,28 @@ public class MainController {
 				
 		}
 	}
-	
-	
+	@GetMapping("delete.do")
+	public String doDelete(@RequestParam List<String> num, Model model) {
+		try {
+			for(String n: num) iPhoneService.delete(n);
+			return "redirect:searchPhone.do";
+		} catch (Exception e) {
+			model.addAttribute("title","핸드폰 관리-핸드폰 삭제");
+			model.addAttribute("message","문제내용 -삭제중 오류가 생김");
+			return "error";
+		}
+	}
+	@GetMapping("delete.do")
+	public String doAjaxDelete(@RequestParam List<String> num, Model model) {
+		try {
+			for(String n: num) iPhoneService.delete(n);
+			return "redirect:searchPhone.do";
+		} catch (Exception e) {
+			model.addAttribute("title","핸드폰 관리-핸드폰 삭제시 에러");
+			model.addAttribute("message","문제내용 -삭제중 오류가 생김");
+			return "error";
+		}
+	}
 	
 
 	}
