@@ -1,4 +1,4 @@
-package com.encore.spring;
+package com.encore.board;
 
 import java.text.DateFormat;
 import java.util.Date;
