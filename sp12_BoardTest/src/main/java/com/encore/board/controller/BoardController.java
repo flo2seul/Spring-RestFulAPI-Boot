@@ -24,57 +24,86 @@ public class BoardController {
 	public String write(BoardVO bvo, HttpSession session,Model model ) throws Exception{
 		MemberVO mvo = (MemberVO)session.getAttribute("mvo");
 		if(mvo==null) return "redirect:index.jsp";
-		
+		try {
 		bvo.setMemberVO(mvo);
 		model.addAttribute("bvo", bvo);
 		boardService.write(bvo);
 		
 		System.out.println("BVO::"+bvo);
 		return "board/show_content";
+		}catch(Exception e) {
+			model.addAttribute("message", "Spring Board - 게시글 작성 중 에러 발생했습니다.");
+			return "Error";
+		}
 	}
 	@RequestMapping("list.do")
 	public String boardList(BoardVO bvo, Model model) {
-        
-        List<BoardVO> list = boardService.boardList(bvo);
+		try {
+        List<BoardVO> list = boardService.boardList();
         model.addAttribute("list", list);
         
         return "board/list";
+		}catch(Exception e) {
+			model.addAttribute("message", "Spring Board - 게시글 검색 중 에러 발생했습니다.");
+			return "Error";
+		}
     }
 	@RequestMapping("showContent.do")
-	public String showContent(int no, Model model) throws Exception{
-		
+	public String showContent(HttpSession session,int no, Model model) throws Exception{
+		if(session.getAttribute("mvo")==null) 
+			return "redirect:index.jsp";
+		try {
 		boardService.updateCount(no);
 		BoardVO vo = boardService.showContent(no);
         model.addAttribute("bvo", vo);
    
 		
 		return"board/show_content";
-				
+		}catch(Exception e) {
+			model.addAttribute("message", "Spring Board - 게시글 상세 보기 중 에러 발생했습니다.");
+			return "Error";
+		}	
 	}
 	@RequestMapping("updateView.do")
 	public String updateView(int no, Model model) throws Exception{
+		try {
 		BoardVO vo = boardService.showContent(no);
 		model.addAttribute("bvo",vo);
 		return "board/update";
-	
+		}catch(Exception e) {
+			model.addAttribute("message", "Spring Board - 게시글 수정폼에서 에러 발생했습니다.");
+			return "Error";
+		}
 				
 	}
 	
 	@RequestMapping("updateBoard.do")
-	public String updateBoard(BoardVO vo) throws Exception{
-		 
-		boardService.updateBoard(vo);
-		return "redirect:list.do";
-	
-				
+	public String updateBoard(BoardVO vo,Model model) throws Exception{
+		try {
+			boardService.updateBoard(vo);
+			
+			BoardVO bvo=boardService.showContent(vo.getNo());
+			model.addAttribute("bvo", bvo);
+			
+			return "board/show_content";
+		}catch(Exception e) {
+			model.addAttribute("message", "Spring Board - 게시글 수정중 에러 발생했습니다.");
+			return "Error";
+		}		
 	}
 	@RequestMapping("delete.do")
-	public String deleteBoard(int no) throws Exception{
-	
-		boardService.deleteBoard(no);
-		return "redirect:list.do";
-	
-				
+	public String deleteBoard(int no,Model model) throws Exception{
+		try {
+			boardService.deleteBoard(no);
+			
+			List<BoardVO> list=boardService.boardList();
+			
+			model.addAttribute("list", list);
+			return "board/list";
+		}catch(Exception e) {
+			model.addAttribute("message", "Spring Board - 게시글 삭제 중 에러 발생했습니다.");
+			return "Error";
+		}	
 	}
 	
 

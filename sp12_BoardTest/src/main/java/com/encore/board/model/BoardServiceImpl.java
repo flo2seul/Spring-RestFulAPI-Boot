@@ -26,8 +26,8 @@ public class BoardServiceImpl implements BoardService{
 
 
 	@Override
-    public List<BoardVO> boardList(BoardVO boardVO) {
-        return boardDAO.boardList(boardVO);
+    public List<BoardVO> boardList() {
+        return boardDAO.boardList();
     }
 
 

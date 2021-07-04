@@ -26,14 +26,14 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 
 	@Override
-    public List<BoardVO> boardList(BoardVO boardVO) {
-        return sqlSession.selectList(NS+"getBoardList",boardVO);
+    public List<BoardVO> boardList() {
+        return sqlSession.selectList(NS+"getBoardList");
     }
 
 	@Override
 	public BoardVO showContent(int no) {
 	
-		return sqlSession.selectOne(NS+"showContent", no);
+		return sqlSession.selectOne(NS+"showContent",no);
 	}
 
 	@Override
