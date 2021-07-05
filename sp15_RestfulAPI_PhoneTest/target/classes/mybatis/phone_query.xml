@@ -43,11 +43,12 @@
 		</if>
 	</select>
 	
-	<delete id="delete" parameterType="string">	
-		DELETE
-		FROM phones
-		WHERE num = #{VALUE}
-	</delete>
+<delete parameterType="list" id="delete">
+	DELETE
+	FROM phones
+	WHERE num in <foreach separator="," close=")" open="(" item="num" collection="list">#{num} </foreach>
+
+</delete>
 	
 	<update id="update" parameterType="phone">
 		UPDATE

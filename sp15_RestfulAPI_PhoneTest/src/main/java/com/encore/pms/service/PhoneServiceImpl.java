@@ -24,8 +24,8 @@ public class PhoneServiceImpl implements IPhoneService{
 	
 	@Transactional
 	@Override
-	public int delete(String num) {
-		return iPhoneDAO.delete(num);
+	public int delete(List<String> list) {
+		return iPhoneDAO.delete(list);
 	}
 
 	@Override

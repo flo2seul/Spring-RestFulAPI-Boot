@@ -23,8 +23,8 @@ public class PhoneDAOImpl implements IPhoneDAO{
 	}
 
 	@Override
-	public int delete(String num) {	
-		return sqlSession.delete(NS+"delete", num);
+	public int delete(List<String> list) {	
+		return sqlSession.delete(NS+"delete", list);
 	}
 
 	@Override
