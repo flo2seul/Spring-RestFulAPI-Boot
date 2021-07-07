@@ -43,4 +43,10 @@ public class PhoneServiceImpl implements IPhoneService{
 		return iPhoneDAO.select(user);
 	}
 
+	@Override
+	public int update(Phone phone) {
+		
+		return iPhoneDAO.update(phone);
+	}
+
 }

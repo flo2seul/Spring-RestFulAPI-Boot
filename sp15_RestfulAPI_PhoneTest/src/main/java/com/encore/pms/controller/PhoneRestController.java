@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.encore.pms.dto.Phone;
@@ -64,23 +65,23 @@ public class PhoneRestController {
 		public ResponseEntity<Phone> insertPhone(@RequestBody Phone phone) throws Exception{
 			try{
 				int result = service.insert(phone);
-			
-			 return new ResponseEntity<Phone>(HttpStatus.NO_CONTENT);
+				return new ResponseEntity<Phone>(phone, HttpStatus.OK);
+		
 		}catch(RuntimeException e) {
-			return new ResponseEntity<Phone>(phone, HttpStatus.OK);
+			return new ResponseEntity<Phone>(HttpStatus.NO_CONTENT);
 		}
 		}
 		
-//		@PutMapping("phone")
-//		public ResponseEntity<Phone> updatePhone(@RequestBody Phone phone)throws Exception{
-//			try{
-//				int result =service.update(phone);
-//				return new ResponseEntity(HttpStatus.OK);
-//			}catch(RuntimeException e) {
-//			 return new ResponseEntity(HttpStatus.NO_CONTENT);
-//		
-//			}
-//		}
+		@PutMapping("phone")
+		public ResponseEntity<Phone> updatePhone(@RequestBody Phone phone)throws Exception{
+			try{
+				int result =service.update(phone);
+				return new ResponseEntity<Phone>( HttpStatus.OK);
+			}catch(RuntimeException e) {
+			 return new ResponseEntity<Phone>(HttpStatus.NO_CONTENT);
+		
+			}
+		}
 		
 		@DeleteMapping("phone/{num}")
 		public ResponseEntity<Phone> deletePhone(@PathVariable String num) throws Exception{

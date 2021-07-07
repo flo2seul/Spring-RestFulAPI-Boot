@@ -42,21 +42,21 @@ public class BookRestController {
 		else return new ResponseEntity(book, HttpStatus.OK);
 	}
 	
-	//특정한 책 등록
+	//insert
 	@PostMapping("book")
 	public ResponseEntity<Book> insertBook(@RequestBody Book book) throws Exception{
 		boolean check = bookService.insertBook(book);
 		if(!check) return new ResponseEntity(HttpStatus.NO_CONTENT);
 		else return new ResponseEntity(book, HttpStatus.OK);
 	}
-	
+	//update
 	@PutMapping("book")
 	public ResponseEntity<Book> updateBook(@RequestBody Book book)throws Exception{
 		boolean check=bookService.update(book);
 		if(!check) return new ResponseEntity(HttpStatus.NO_CONTENT);
 		else return new ResponseEntity(HttpStatus.OK);
 	}
-	
+	//delete
 	@DeleteMapping("book/{isbn}")
 	public ResponseEntity<List<Book>> deleteBook(@PathVariable String isbn) throws Exception{
 		boolean check = bookService.delete(isbn);
